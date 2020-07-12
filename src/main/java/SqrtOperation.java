@@ -7,15 +7,25 @@
 
 public class SqrtOperation {
     public double sqrt(double number) {
-        double t;
-        double squareRoot = number / 2;
-        if (number <0) {
-            //try {
-              throw new IllegalArgumentException("Expected non-negative number, got " + number);
-            // catch (IllegalArgumentException e) {
-           //System.out.println("Expected non-negative number, got" + number);
+        if (number < 0) {
+            throw new IllegalArgumentException("Expected non-negative number, got " + number);
         }
-       else  return Math.sqrt(number);
+        double squareRoot = 1.0;
+        double check = 0.0;
+        for (int i = 0; i <= 100; i++) {
+            if (number == 0) {
+                squareRoot = 0.0;
+                break;
+            }
+            squareRoot = squareRoot - (squareRoot * squareRoot - number) / (2 * squareRoot);
+            if (i != 0) {
+                if (check - squareRoot < 0.00000001) {
+                    break;
+                }
+            }
+            check = squareRoot;
+        }
+        return squareRoot;
     }
 }
 
